@@ -10,11 +10,11 @@
 //  Copyright © 2015-2018 Clipy Project.
 //
 
-"Launch Clipy on system startup?" = "Vuoi avviare Clipy al login?";
+"Launch Clipy2 on system startup?" = "Vuoi avviare Clipy2 al login?";
 
 "You can change this setting in the Preferences if you want" = "Puoi modificare questa impostazione nelle Preferenze.";
 
-"Launch on system startup" = "Avvia Clipy al login";
+"Launch on system startup" = "Avvia Clipy2 al login";
 
 "Don't Launch" = "Non avviare";
 
@@ -28,7 +28,7 @@
 
 "Preferences" = "Preferenze...";
 
-"Quit Clipy" = "Esci da Clipy";
+"Quit Clipy2" = "Esci da Clipy2";
 
 "History" = "Cronologia";
 

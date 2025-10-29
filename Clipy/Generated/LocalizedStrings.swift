@@ -30,8 +30,8 @@ internal enum L10n {
   internal static let general = L10n.tr("Localizable", "General")
   /// History
   internal static let history = L10n.tr("Localizable", "History")
-  /// Launch Clipy on system startup?
-  internal static let launchClipyOnSystemStartup = L10n.tr("Localizable", "Launch Clipy on system startup?")
+  /// Launch Clipy2 on system startup?
+  internal static let launchClipy2OnSystemStartup = L10n.tr("Localizable", "Launch Clipy2 on system startup?")
   /// Launch on system startup
   internal static let launchOnSystemStartup = L10n.tr("Localizable", "Launch on system startup")
   /// Menu
@@ -44,8 +44,8 @@ internal enum L10n {
   internal static let pleaseFillInTheContentsOfTheSnippet = L10n.tr("Localizable", "Please fill in the contents of the snippet")
   /// Preferences...
   internal static let preferences = L10n.tr("Localizable", "Preferences")
-  /// Quit Clipy
-  internal static let quitClipy = L10n.tr("Localizable", "Quit Clipy")
+  /// Quit Clipy2
+  internal static let quitClipy2 = L10n.tr("Localizable", "Quit Clipy2")
   /// Shortcuts
   internal static let shortcuts = L10n.tr("Localizable", "Shortcuts")
   /// Snippet

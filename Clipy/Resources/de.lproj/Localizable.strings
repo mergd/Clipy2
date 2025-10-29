@@ -10,7 +10,7 @@
 //  Copyright © 2015-2018 Clipy Project.
 //
 
-"Launch Clipy on system startup?" = "Clipy beim Starten öffnen?";
+"Launch Clipy2 on system startup?" = "Clipy2 beim Starten öffnen?";
 
 "You can change this setting in the Preferences if you want" = "Sie können diese Option in den Einstellungen ändern.";
 
@@ -28,7 +28,7 @@
 
 "Preferences" = "Einstellungen...";
 
-"Quit Clipy" = "Clipy beenden";
+"Quit Clipy2" = "Clipy2 beenden";
 
 "History" = "Verlauf";
 

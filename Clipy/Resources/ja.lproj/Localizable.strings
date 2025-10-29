@@ -10,7 +10,7 @@
 //  Copyright © 2015-2018 Clipy Project.
 //
 
-"Launch Clipy on system startup?" = "システム起動時にClipyを起動しますか?";
+"Launch Clipy2 on system startup?" = "システム起動時にClipy2を起動しますか?";
 
 "You can change this setting in the Preferences if you want" = "この設定はいつでも変更できます";
 
@@ -28,7 +28,7 @@
 
 "Preferences" = "環境設定...";
 
-"Quit Clipy" = "Clipyを終了";
+"Quit Clipy2" = "Clipy2を終了";
 
 "History" = "履歴";
 
@@ -54,6 +54,6 @@
 
 "Please allow Accessibility" = "アクセシビリティを有効にしてください。";
 
-"To do this action please allow Accessibility in Security Privacy preferences located in System Preferences" = "この動作を行うためにはシステム環境設定の\"セキュリティとプライバシー\"環境設定で、Clipyへのアクセシビリティのアクセスを許可してください。";
+"To do this action please allow Accessibility in Security Privacy preferences located in System Preferences" = "この動作を行うためにはシステム環境設定の\"セキュリティとプライバシー\"環境設定で、Clipy2へのアクセシビリティのアクセスを許可してください。";
 
 "Open System Preferences" = "\"システム環境設定\"を開く";

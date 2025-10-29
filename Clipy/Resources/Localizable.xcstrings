@@ -1,37 +1,37 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Launch Clipy on system startup?" : {
+    "Launch Clipy2 on system startup?" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clipy beim Starten öffnen?"
+            "value" : "Clipy2 beim Starten öffnen?"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Launch Clipy on system startup?"
+            "value" : "Launch Clipy2 on system startup?"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vuoi avviare Clipy al login?"
+            "value" : "Vuoi avviare Clipy2 al login?"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "システム起動時にClipyを起動しますか?"
+            "value" : "システム起動時にClipy2を起動しますか?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "系统启动时打开 Clipy?"
+            "value" : "系统启动时打开 Clipy2?"
           }
         }
       }
@@ -316,37 +316,37 @@
         }
       }
     },
-    "Quit Clipy" : {
+    "Quit Clipy2" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clipy beenden"
+            "value" : "Clipy2 beenden"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quit Clipy"
+            "value" : "Quit Clipy2"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esci da Clipy"
+            "value" : "Esci da Clipy2"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clipyを終了"
+            "value" : "Clipy2を終了"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "退出 Clipy"
+            "value" : "退出 Clipy2"
           }
         }
       }

@@ -16,9 +16,9 @@ struct Constants {
 
     struct Application {
         #if DEBUG
-            static let name = "ClipyDEBUG"
+            static let name = "Clipy2DEBUG"
         #else
-            static let name = "Clipy"
+            static let name = "Clipy2"
         #endif
         static let appcastURL = URL(string: "https://clipy-app.com/appcast.xml")!
     }
