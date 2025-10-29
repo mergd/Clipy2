@@ -20,12 +20,9 @@ target 'Clipy' do
   pod 'SwiftLint'
   pod 'SwiftGen'
 
-  # Temporarily commented out test dependencies to fix build
-  # target 'ClipyTests' do
-  #   inherit! :search_paths
-  #   pod 'Quick'
-  #   pod 'Nimble'
-  # end
+  target 'ClipyTests' do
+    inherit! :search_paths
+  end
 
 end
 
