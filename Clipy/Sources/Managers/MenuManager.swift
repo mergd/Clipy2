@@ -194,7 +194,7 @@ private extension MenuManager {
         clipMenu?.addItem(NSMenuItem(title: L10n.editSnippets, action: #selector(AppDelegate.showSnippetEditorWindow)))
         clipMenu?.addItem(NSMenuItem(title: L10n.preferences, action: #selector(AppDelegate.showPreferenceWindow)))
         clipMenu?.addItem(NSMenuItem.separator())
-        clipMenu?.addItem(NSMenuItem(title: L10n.quitClipy, action: #selector(AppDelegate.terminate)))
+        clipMenu?.addItem(NSMenuItem(title: L10n.quitClipy2, action: #selector(AppDelegate.terminate)))
 
         statusItem?.menu = clipMenu
     }
