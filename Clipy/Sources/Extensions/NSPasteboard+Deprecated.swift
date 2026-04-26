@@ -14,8 +14,8 @@ import Cocoa
 
 /**
  *  The contents of PasteboardType has been changed with swift 4.
- *  However, we will use the swift 3 style to keep compatibility with existing items
- *  Help wanted - If there is a good implementation I would like to replace it.
+ *  However, the archived Clipy history still stores these old names.
+ *  Keep the deprecated constants isolated here while normalizing modern pasteboard types at the boundary.
  **/
 extension NSPasteboard.PasteboardType {
 
@@ -45,6 +45,30 @@ extension NSPasteboard.PasteboardType {
 
     static var deprecatedTIFF: NSPasteboard.PasteboardType {
         return NSPasteboard.PasteboardType(rawValue: "NSTIFFPboardType")
+    }
+
+    static var modernPNG: NSPasteboard.PasteboardType {
+        return NSPasteboard.PasteboardType(rawValue: "public.png")
+    }
+
+    static var modernJPEG: NSPasteboard.PasteboardType {
+        return NSPasteboard.PasteboardType(rawValue: "public.jpeg")
+    }
+
+    static var modernTIFF: NSPasteboard.PasteboardType {
+        return NSPasteboard.PasteboardType(rawValue: "public.tiff")
+    }
+
+    static var modernHEIC: NSPasteboard.PasteboardType {
+        return NSPasteboard.PasteboardType(rawValue: "public.heic")
+    }
+
+    static var modernImageTypes: [NSPasteboard.PasteboardType] {
+        return [.modernPNG, .modernJPEG, .modernTIFF, .modernHEIC]
+    }
+
+    var clipyCompatibleType: NSPasteboard.PasteboardType {
+        return NSPasteboard.PasteboardType.modernImageTypes.contains(self) ? .deprecatedTIFF : self
     }
 
 }

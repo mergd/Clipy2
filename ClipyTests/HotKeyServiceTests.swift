@@ -61,7 +61,7 @@ final class HotKeyServiceTests: XCTestCase {
             Constants.Menu.history: ["keyCode": 9, "modifiers": 768],
             Constants.Menu.snippet: ["keyCode": 11, "modifiers": 4352]
         ]
-        defaults.register(defaults: [Constants.UserDefaults.hotKeys: defaultKeyCombos])
+        defaults.set(defaultKeyCombos, forKey: Constants.UserDefaults.hotKeys)
         defaults.synchronize()
 
         XCTAssertFalse(defaults.bool(forKey: Constants.HotKey.migrateNewKeyCombo))
@@ -138,6 +138,8 @@ final class HotKeyServiceTests: XCTestCase {
     }
 
     func testUnarchiveSavedKeyCombos() throws {
+        defaults.set(true, forKey: Constants.HotKey.migrateNewKeyCombo)
+
         let mainKeyCombo = try XCTUnwrap(KeyCombo(QWERTYKeyCode: 9, carbonModifiers: 768))
         let historyKeyCombo = try XCTUnwrap(KeyCombo(doubledCocoaModifiers: .command))
         let snippetKeyCombo = try XCTUnwrap(KeyCombo(QWERTYKeyCode: 0, cocoaModifiers: .shift))

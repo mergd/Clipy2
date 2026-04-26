@@ -30,7 +30,7 @@ final class ClipService {
     func startMonitoring() {
         disposeBag = DisposeBag()
         // Pasteboard observe timer
-        Observable<Int>.interval(.microseconds(750), scheduler: scheduler)
+        Observable<Int>.interval(.milliseconds(750), scheduler: scheduler)
             .map { _ in NSPasteboard.general.changeCount }
             .withLatestFrom(cachedChangeCount.asObservable()) { ($0, $1) }
             .filter { $0 != $1 }
@@ -162,7 +162,9 @@ extension ClipService {
     }
 
     private func types(with pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
-        let types = pasteboard.types?.filter { canSave(with: $0) } ?? []
+        let types = pasteboard.types?
+            .map { $0.clipyCompatibleType }
+            .filter { canSave(with: $0) } ?? []
         return NSOrderedSet(array: types).array as? [NSPasteboard.PasteboardType] ?? []
     }
 

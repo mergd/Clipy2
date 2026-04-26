@@ -36,8 +36,10 @@ final class CPYClipData: NSObject {
         var hash = types.map { $0.rawValue }.joined().hash
         if let image = self.image, let imageData = image.tiffRepresentation {
             hash ^= imageData.count
+            hash ^= image.pixelSizeHash
         } else if let image = self.image {
             hash ^= image.hash
+            hash ^= image.pixelSizeHash
         }
         if !fileNames.isEmpty {
             fileNames.forEach { hash ^= $0.hash }

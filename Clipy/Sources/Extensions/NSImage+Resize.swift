@@ -14,6 +14,14 @@ import Foundation
 import Cocoa
 
 extension NSImage {
+    var pixelSizeHash: Int {
+        guard let representation = representations.first else {
+            return Int(size.width.rounded()) &* 31 ^ Int(size.height.rounded())
+        }
+
+        return representation.pixelsWide &* 31 ^ representation.pixelsHigh
+    }
+
     func resizeImage(_ width: CGFloat, _ height: CGFloat) -> NSImage? {
 
         let representations = self.representations
@@ -26,12 +34,18 @@ extension NSImage {
             }
         }
 
-        if bitmapRep == nil {
+        let origWidth: CGFloat
+        let origHeight: CGFloat
+
+        if let bitmapRep = bitmapRep {
+            origWidth = CGFloat(bitmapRep.pixelsWide)
+            origHeight = CGFloat(bitmapRep.pixelsHigh)
+        } else if size.width > 0 && size.height > 0 {
+            origWidth = size.width
+            origHeight = size.height
+        } else {
             return nil
         }
-
-        let origWidth = CGFloat(bitmapRep!.pixelsWide)
-        let origHeight = CGFloat(bitmapRep!.pixelsHigh)
 
         let aspect = CGFloat(origWidth) / CGFloat(origHeight)
 
@@ -65,14 +79,19 @@ extension NSImage {
             newHeight = origHeight
         }
 
-        let newImageRep = self.bestRepresentation(for: NSRect(x: 0, y: 0, width: newWidth, height: newHeight), context: nil, hints: nil)
-        if newImageRep == nil {
-            return nil
+        if let newImageRep = bestRepresentation(for: NSRect(x: 0, y: 0, width: newWidth, height: newHeight), context: nil, hints: nil) {
+            let thumbnail = NSImage(size: NSSize(width: newWidth, height: newHeight))
+            thumbnail.addRepresentation(newImageRep)
+            return thumbnail
         }
 
         let thumbnail = NSImage(size: NSSize(width: newWidth, height: newHeight))
-        thumbnail.addRepresentation(newImageRep!)
-
+        thumbnail.lockFocus()
+        draw(in: NSRect(x: 0, y: 0, width: newWidth, height: newHeight),
+             from: NSRect(origin: .zero, size: size),
+             operation: .copy,
+             fraction: 1.0)
+        thumbnail.unlockFocus()
         return thumbnail
     }
 }
