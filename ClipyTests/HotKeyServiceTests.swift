@@ -1,7 +1,7 @@
 import XCTest
 import Magnet
 import Carbon
-@testable import Clipy
+@testable import Clipy2
 
 final class HotKeyServiceTests: XCTestCase {
 

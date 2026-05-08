@@ -1,5 +1,5 @@
 import XCTest
-@testable import Clipy
+@testable import Clipy2
 
 final class DraggedDataTests: XCTestCase {
 

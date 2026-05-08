@@ -41,7 +41,7 @@
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCz-7v-qzU" customClass="CPYDesignableButton" customModule="Clipy" customModuleProvider="target">
                     <rect key="frame" x="59" y="160" width="403" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Send crash report and error log (reflected at the next launch)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="LsC-YB-qAw">
+                    <buttonCell key="cell" type="check" title="Write diagnostic events to Console (takes effect next launch)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="LsC-YB-qAw">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

@@ -12,14 +12,17 @@
 
 import Cocoa
 import RealmSwift
+import OSLog
 
 final class CPYUtilities {
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "com.clipy2.app",
+        category: "Diagnostics"
+    )
 
     static func initSDKs() {
-        // Fabric
         AppEnvironment.current.defaults.register(defaults: ["NSApplicationCrashOnExceptions": true])
         guard AppEnvironment.current.defaults.bool(forKey: Constants.UserDefaults.collectCrashReport) else { return }
-        // TODO: - Migrate Firebase Crashlytics
         CPYUtilities.sendCustomLog(with: "applicationDidFinishLaunching")
     }
 
@@ -35,7 +38,7 @@ final class CPYUtilities {
         defaultValues.updateValue(AppDelegate.storeTypesDictinary(), forKey: Constants.UserDefaults.storeTypes)
         defaultValues.updateValue(NSNumber(value: true), forKey: Constants.UserDefaults.inputPasteCommand)
         defaultValues.updateValue(NSNumber(value: true), forKey: Constants.UserDefaults.reorderClipsAfterPasting)
-        defaultValues.updateValue(NSNumber(value: true), forKey: Constants.UserDefaults.collectCrashReport)
+        defaultValues.updateValue(NSNumber(value: false), forKey: Constants.UserDefaults.collectCrashReport)
 
         /* Menu */
         defaultValues.updateValue(NSNumber(value: 16), forKey: Constants.UserDefaults.menuIconSize)
@@ -105,6 +108,6 @@ final class CPYUtilities {
 
     static func sendCustomLog(with name: String) {
         guard AppEnvironment.current.defaults.bool(forKey: Constants.UserDefaults.collectCrashReport) else { return }
-        // TODO: - Migrate Firebase Crashlytics
+        logger.info("\(name, privacy: .public)")
     }
 }

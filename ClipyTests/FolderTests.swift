@@ -1,6 +1,6 @@
 import XCTest
 import RealmSwift
-@testable import Clipy
+@testable import Clipy2
 
 final class FolderTests: XCTestCase {
 
