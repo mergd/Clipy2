@@ -8,5 +8,5 @@ preview_urls = false
 VERSION = "1.0.0"
 RELEASE_NOTES_URL = "https://github.com/mergd/Clipy2/releases/tag/v1.0.0"
 DOWNLOAD_URL = "https://github.com/mergd/Clipy2/releases/download/v1.0.0/Clipy2-1.0.0.dmg"
-DMG_LENGTH = "10094555"
-DMG_SHA256 = "d2f6c3978f2d487919e4df864fe57a124559acddf23fb119c663d4c61a016c0a"
+DMG_LENGTH = "12131019"
+DMG_SHA256 = "877cc294cf00f6d2bc4ec827cfbbcad3089297fcbd6a458ecbfafe31aafce405"
