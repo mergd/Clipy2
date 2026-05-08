@@ -53,28 +53,6 @@ final class CPYPreferencesWindowController: NSWindowController {
     }
 
     private let toolbarIdentifier = NSToolbar.Identifier("com.clipy2.preferences.toolbar")
-    @IBOutlet private weak var toolBar: NSView!
-    // ImageViews
-    @IBOutlet private weak var generalImageView: NSImageView!
-    @IBOutlet private weak var menuImageView: NSImageView!
-    @IBOutlet private weak var typeImageView: NSImageView!
-    @IBOutlet private weak var excludeImageView: NSImageView!
-    @IBOutlet private weak var shortcutsImageView: NSImageView!
-    @IBOutlet private weak var updatesImageView: NSImageView!
-    // Labels
-    @IBOutlet private weak var generalTextField: NSTextField!
-    @IBOutlet private weak var menuTextField: NSTextField!
-    @IBOutlet private weak var typeTextField: NSTextField!
-    @IBOutlet private weak var excludeTextField: NSTextField!
-    @IBOutlet private weak var shortcutsTextField: NSTextField!
-    @IBOutlet private weak var updatesTextField: NSTextField!
-    // Buttons
-    @IBOutlet private weak var generalButton: NSButton!
-    @IBOutlet private weak var menuButton: NSButton!
-    @IBOutlet private weak var typeButton: NSButton!
-    @IBOutlet private weak var excludeButton: NSButton!
-    @IBOutlet private weak var shortcutsButton: NSButton!
-    @IBOutlet private weak var updatesButton: NSButton!
     // ViewController
     private let viewController = [NSViewController(nibName: "CPYGeneralPreferenceViewController", bundle: nil),
                                   NSViewController(nibName: "CPYMenuPreferenceViewController", bundle: nil),
@@ -88,7 +66,7 @@ final class CPYPreferencesWindowController: NSWindowController {
         super.windowDidLoad()
         configureWindow()
         configureNativeToolbar()
-        toolBarItemTapped(generalButton)
+        selectPane(.general)
     }
 
     override func showWindow(_ sender: Any?) {
@@ -99,16 +77,9 @@ final class CPYPreferencesWindowController: NSWindowController {
 
 // MARK: - IBActions
 extension CPYPreferencesWindowController {
-    @IBAction private func toolBarItemTapped(_ sender: NSButton) {
-        selectedTab(sender.tag)
-        switchView(sender.tag)
-    }
-
     @objc private func nativeToolbarItemTapped(_ sender: NSToolbarItem) {
         guard let pane = Pane.allCases.first(where: { $0.toolbarIdentifier == sender.itemIdentifier }) else { return }
-        window?.toolbar?.selectedItemIdentifier = pane.toolbarIdentifier
-        selectedTab(pane.rawValue)
-        switchView(pane.rawValue)
+        selectPane(pane)
     }
 }
 
@@ -133,17 +104,16 @@ private extension CPYPreferencesWindowController {
         window.title = "\(Constants.Application.name) Settings"
         window.collectionBehavior = .canJoinAllSpaces
         window.backgroundColor = .windowBackgroundColor
-        window.titleVisibility = .visible
+        window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
         window.isMovableByWindowBackground = true
         window.minSize = NSSize(width: 520, height: 340)
-        toolBar.removeFromSuperview()
     }
 
     func configureNativeToolbar() {
         let toolbar = NSToolbar(identifier: toolbarIdentifier)
         toolbar.delegate = self
-        toolbar.displayMode = .iconAndLabel
+        toolbar.displayMode = .iconOnly
         toolbar.sizeMode = .regular
         toolbar.allowsUserCustomization = false
         toolbar.autosavesConfiguration = false
@@ -151,96 +121,33 @@ private extension CPYPreferencesWindowController {
         window?.toolbar = toolbar
     }
 
-    func resetImages() {
-        generalImageView.image = Asset.prefGeneral.image
-        menuImageView.image = Asset.prefMenu.image
-        typeImageView.image = Asset.prefType.image
-        excludeImageView.image = Asset.prefExcluded.image
-        shortcutsImageView.image = Asset.prefShortcut.image
-        updatesImageView.image = Asset.prefUpdate.image
-
-        generalTextField.textColor = ColorName.tabTitle.color
-        menuTextField.textColor = ColorName.tabTitle.color
-        typeTextField.textColor = ColorName.tabTitle.color
-        excludeTextField.textColor = ColorName.tabTitle.color
-        shortcutsTextField.textColor = ColorName.tabTitle.color
-        updatesTextField.textColor = ColorName.tabTitle.color
-    }
-
-    func selectedTab(_ index: Int) {
-        resetImages()
-        if let pane = Pane(rawValue: index) {
-            window?.toolbar?.selectedItemIdentifier = pane.toolbarIdentifier
-            window?.title = "\(Constants.Application.name) \(pane.title)"
-        }
-
-        switch index {
-        case 0:
-            generalImageView.image = Asset.prefGeneralOn.image
-            generalTextField.textColor = ColorName.clipy.color
-        case 1:
-            menuImageView.image = Asset.prefMenuOn.image
-            menuTextField.textColor = ColorName.clipy.color
-        case 2:
-            typeImageView.image = Asset.prefTypeOn.image
-            typeTextField.textColor = ColorName.clipy.color
-        case 3:
-            excludeImageView.image = Asset.prefExcludedOn.image
-            excludeTextField.textColor = ColorName.clipy.color
-        case 4:
-            shortcutsImageView.image = Asset.prefShortcutOn.image
-            shortcutsTextField.textColor = ColorName.clipy.color
-        case 5:
-            updatesImageView.image = Asset.prefUpdateOn.image
-            updatesTextField.textColor = ColorName.clipy.color
-        default: break
-        }
+    private func selectPane(_ pane: Pane) {
+        window?.toolbar?.selectedItemIdentifier = pane.toolbarIdentifier
+        window?.title = "\(Constants.Application.name) \(pane.title)"
+        switchView(pane.rawValue)
     }
 
     func switchView(_ index: Int) {
         let newView = viewController[index].view
         preparePanel(newView)
-        // Remove current views without toolbar
         window?.contentView?.subviews.forEach { view in
-            if view != toolBar {
-                view.removeFromSuperview()
-            }
+            view.removeFromSuperview()
         }
         // Resize view
         let frame = window!.frame
         var newFrame = window!.frameRect(forContentRect: newView.frame)
+        newFrame.size.width = max(newFrame.width, window!.minSize.width)
         newFrame.origin = frame.origin
         newFrame.origin.y += frame.height - newFrame.height
         window?.setFrame(newFrame, display: true)
+        newView.frame.origin = .zero
+        newView.frame.size.width = window?.contentView?.bounds.width ?? newView.frame.width
         window?.contentView?.addSubview(newView)
     }
 
     func preparePanel(_ view: NSView) {
         view.autoresizingMask = [.width, .height]
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
-        styleControls(in: view)
-    }
-
-    func styleControls(in view: NSView) {
-        for subview in view.subviews {
-            if let textField = subview as? NSTextField {
-                textField.font = textField.font.map { NSFont.systemFont(ofSize: $0.pointSize) }
-                if !textField.isEditable {
-                    textField.textColor = .labelColor
-                    textField.backgroundColor = .clear
-                }
-            } else if let button = subview as? NSButton {
-                button.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
-                if button.bezelStyle == .rounded || button.bezelStyle == .regularSquare {
-                    button.controlSize = .regular
-                }
-            } else if let box = subview as? NSBox {
-                box.isTransparent = true
-                box.titleFont = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .semibold)
-            }
-            styleControls(in: subview)
-        }
+        CPYNativeControlStyler.styleControls(in: view)
     }
 }
 

@@ -42,6 +42,11 @@ private extension CPYShortcutsPreferenceViewController {
         snippetShortcutRecordView.keyCombo = AppEnvironment.current.hotKeyService.snippetKeyCombo
         clearHistoryShortcutRecordView.keyCombo = AppEnvironment.current.hotKeyService.clearHistoryKeyCombo
     }
+
+    @IBAction func resetShortcutsButtonTapped(_ sender: AnyObject) {
+        AppEnvironment.current.hotKeyService.resetDefaultHotKeys()
+        prepareHotKeys()
+    }
 }
 
 // MARK: - RecordView Delegate

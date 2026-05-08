@@ -21,8 +21,6 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal static let iconFolder = ImageAsset(name: "icon_folder")
   internal static let iconText = ImageAsset(name: "icon_text")
-  internal static let prefBeta = ImageAsset(name: "pref_beta")
-  internal static let prefBetaOn = ImageAsset(name: "pref_beta_on")
   internal static let prefExcluded = ImageAsset(name: "pref_excluded")
   internal static let prefExcludedOn = ImageAsset(name: "pref_excluded_on")
   internal static let prefGeneral = ImageAsset(name: "pref_general")

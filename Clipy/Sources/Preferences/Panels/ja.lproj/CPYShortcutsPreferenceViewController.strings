@@ -16,3 +16,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Clear History:"; ObjectID = "f3b-Ht-X5w"; */
 "f3b-Ht-X5w.title" = "履歴をクリア:";
+
+/* Class = "NSButtonCell"; title = "Restore Defaults"; ObjectID = "rst-df-cel"; */
+"rst-df-cel.title" = "デフォルトに戻す";

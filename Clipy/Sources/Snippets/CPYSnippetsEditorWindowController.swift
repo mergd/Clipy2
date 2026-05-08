@@ -137,13 +137,12 @@ private extension CPYSnippetsEditorWindowController {
         window.title = "\(Constants.Application.name) Snippets"
         window.collectionBehavior = .canJoinAllSpaces
         window.backgroundColor = .windowBackgroundColor
-        window.titleVisibility = .visible
+        window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = false
         window.isMovableByWindowBackground = true
         window.minSize = NSSize(width: 760, height: 460)
-        collapseLegacyToolbar(in: window.contentView)
         configureNativeToolbar(for: window)
-        styleControls(in: window.contentView)
+        CPYNativeControlStyler.styleControls(in: window.contentView)
     }
 
     func configureNativeToolbar(for window: NSWindow) {
@@ -156,42 +155,6 @@ private extension CPYSnippetsEditorWindowController {
         window.toolbar = toolbar
     }
 
-    func collapseLegacyToolbar(in view: NSView?) {
-        guard let view = view else { return }
-        guard let legacyToolbar = view.subviews.first(where: { subview in
-            subview.frame.height == 56 && subview.frame.minY >= view.bounds.height - 56
-        }) else { return }
-
-        legacyToolbar.isHidden = true
-        legacyToolbar.constraints
-            .filter { $0.firstAttribute == .height }
-            .forEach { $0.constant = 0 }
-    }
-
-    func styleControls(in view: NSView?) {
-        guard let view = view else { return }
-        view.wantsLayer = true
-        if !(view is NSScrollView) {
-            view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
-        }
-
-        for subview in view.subviews {
-            if let textField = subview as? NSTextField {
-                textField.font = textField.font.map { NSFont.systemFont(ofSize: $0.pointSize) }
-                if !textField.isEditable {
-                    textField.textColor = .labelColor
-                    textField.backgroundColor = .clear
-                }
-            } else if let button = subview as? NSButton {
-                button.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
-                button.controlSize = .regular
-            } else if let box = subview as? NSBox {
-                box.isTransparent = true
-                box.titleFont = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .semibold)
-            }
-            styleControls(in: subview)
-        }
-    }
 }
 
 // MARK: - NSToolbarDelegate

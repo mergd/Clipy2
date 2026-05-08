@@ -12,6 +12,7 @@
 
 import Cocoa
 import RealmSwift
+import KeyHolder
 import OSLog
 
 final class CPYUtilities {
@@ -109,5 +110,89 @@ final class CPYUtilities {
     static func sendCustomLog(with name: String) {
         guard AppEnvironment.current.defaults.bool(forKey: Constants.UserDefaults.collectCrashReport) else { return }
         logger.info("\(name, privacy: .public)")
+    }
+}
+
+enum CPYNativeControlStyler {
+    static func styleControls(in view: NSView?) {
+        guard let view = view else { return }
+        view.wantsLayer = true
+
+        switch view {
+        case let scrollView as NSScrollView:
+            scrollView.drawsBackground = true
+            scrollView.backgroundColor = .controlBackgroundColor
+            scrollView.contentView.drawsBackground = true
+            scrollView.contentView.backgroundColor = .controlBackgroundColor
+        case let textView as NSTextView:
+            textView.font = textView.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
+            textView.textColor = .textColor
+            textView.backgroundColor = .textBackgroundColor
+            textView.insertionPointColor = .textColor
+            if let placeholderTextView = textView as? CPYPlaceHolderTextView {
+                placeholderTextView.placeHolderColor = .placeholderTextColor
+            }
+        case let tableView as NSTableView:
+            tableView.backgroundColor = .controlBackgroundColor
+            tableView.gridColor = .separatorColor
+        case let recordView as RecordView:
+            styleRecordView(recordView)
+        default:
+            view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        }
+
+        for subview in view.subviews {
+            switch subview {
+            case let textField as NSTextField:
+                styleTextField(textField)
+            case let popup as NSPopUpButton:
+                popup.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+                styleButton(popup)
+            case let button as NSButton:
+                styleButton(button)
+            case let box as NSBox:
+                box.isTransparent = true
+                box.titleFont = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .semibold)
+            default:
+                break
+            }
+
+            styleControls(in: subview)
+        }
+    }
+
+    private static func styleTextField(_ textField: NSTextField) {
+        textField.font = textField.font.map { NSFont.systemFont(ofSize: $0.pointSize) }
+        textField.textColor = textField.isEditable ? .textColor : .labelColor
+        textField.backgroundColor = textField.isEditable ? .textBackgroundColor : .clear
+
+        guard !textField.isEditable else { return }
+        if let title = textField.stringValue.nilIfEmpty {
+            textField.attributedStringValue = NSAttributedString(
+                string: title,
+                attributes: [.foregroundColor: NSColor.labelColor, .font: textField.font as Any]
+            )
+        }
+    }
+
+    private static func styleButton(_ button: NSButton) {
+        button.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        if button.bezelStyle == .rounded || button.bezelStyle == .regularSquare {
+            button.controlSize = .regular
+        }
+    }
+
+    private static func styleRecordView(_ recordView: RecordView) {
+        recordView.backgroundColor = .controlBackgroundColor
+        recordView.borderColor = .separatorColor
+        recordView.borderWidth = 1
+        recordView.cornerRadius = 8
+        recordView.tintColor = .controlAccentColor
+    }
+}
+
+private extension String {
+    var nilIfEmpty: String? {
+        isEmpty ? nil : self
     }
 }

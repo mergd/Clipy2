@@ -15,7 +15,7 @@ import Cocoa
 class CPYPlaceHolderTextView: NSTextView {
 
     // MARK: - Properties
-    @IBInspectable var placeHolderColor: NSColor = .disabledControlTextColor {
+    @IBInspectable var placeHolderColor: NSColor = .placeholderTextColor {
         didSet {
             needsDisplay = true
         }

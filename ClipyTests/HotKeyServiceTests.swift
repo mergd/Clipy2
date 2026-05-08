@@ -192,6 +192,39 @@ final class HotKeyServiceTests: XCTestCase {
         XCTAssertEqual(snippetCombos["modifiers"], 768)
     }
 
+    func testResetDefaultHotKeys() throws {
+        let service = HotKeyService()
+        let customMainCombo = try XCTUnwrap(KeyCombo(QWERTYKeyCode: 0, carbonModifiers: cmdKey))
+        let customHistoryCombo = try XCTUnwrap(KeyCombo(QWERTYKeyCode: 1, carbonModifiers: shiftKey))
+        let customSnippetCombo = try XCTUnwrap(KeyCombo(QWERTYKeyCode: 2, carbonModifiers: controlKey))
+        let customClearHistoryCombo = try XCTUnwrap(KeyCombo(QWERTYKeyCode: 3, carbonModifiers: optionKey))
+
+        service.change(with: .main, keyCombo: customMainCombo)
+        service.change(with: .history, keyCombo: customHistoryCombo)
+        service.change(with: .snippet, keyCombo: customSnippetCombo)
+        service.changeClearHistoryKeyCombo(customClearHistoryCombo)
+
+        service.resetDefaultHotKeys()
+
+        let mainCombo = try XCTUnwrap(service.mainKeyCombo)
+        XCTAssertEqual(mainCombo.QWERTYKeyCode, 9)
+        XCTAssertEqual(mainCombo.modifiers, 768)
+        XCTAssertEqual(defaults.archiveDataForKey(KeyCombo.self, key: Constants.HotKey.mainKeyCombo), mainCombo)
+
+        let historyCombo = try XCTUnwrap(service.historyKeyCombo)
+        XCTAssertEqual(historyCombo.QWERTYKeyCode, 9)
+        XCTAssertEqual(historyCombo.modifiers, 4352)
+        XCTAssertEqual(defaults.archiveDataForKey(KeyCombo.self, key: Constants.HotKey.historyKeyCombo), historyCombo)
+
+        let snippetCombo = try XCTUnwrap(service.snippetKeyCombo)
+        XCTAssertEqual(snippetCombo.QWERTYKeyCode, 11)
+        XCTAssertEqual(snippetCombo.modifiers, 768)
+        XCTAssertEqual(defaults.archiveDataForKey(KeyCombo.self, key: Constants.HotKey.snippetKeyCombo), snippetCombo)
+
+        XCTAssertNil(service.clearHistoryKeyCombo)
+        XCTAssertNil(defaults.archiveDataForKey(KeyCombo.self, key: Constants.HotKey.clearHistoryKeyCombo))
+    }
+
     // MARK: - Clear History HotKey Tests
 
     func testAddAndRemoveClearHistoryHotkey() throws {

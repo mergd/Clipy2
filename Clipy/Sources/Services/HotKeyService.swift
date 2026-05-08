@@ -56,6 +56,13 @@ extension HotKeyService {
 
 // MARK: - Setup
 extension HotKeyService {
+    func resetDefaultHotKeys() {
+        change(with: .main, keyCombo: HotKeyService.defaultKeyCombo(forKey: Constants.Menu.clip))
+        change(with: .history, keyCombo: HotKeyService.defaultKeyCombo(forKey: Constants.Menu.history))
+        change(with: .snippet, keyCombo: HotKeyService.defaultKeyCombo(forKey: Constants.Menu.snippet))
+        changeClearHistoryKeyCombo(nil)
+    }
+
     func setupDefaultHotKeys() {
         // Migration new framework
         if !AppEnvironment.current.defaults.bool(forKey: Constants.HotKey.migrateNewKeyCombo) {
@@ -104,6 +111,12 @@ extension HotKeyService {
         guard let data = AppEnvironment.current.defaults.object(forKey: key) as? Data else { return nil }
         guard let keyCombo = NSKeyedUnarchiver.unarchiveObject(with: data) as? KeyCombo else { return nil }
         return keyCombo
+    }
+
+    private static func defaultKeyCombo(forKey key: String) -> KeyCombo? {
+        guard let combo = defaultKeyCombos[key] as? [String: Any] else { return nil }
+        guard let keyCode = combo["keyCode"] as? Int, let modifiers = combo["modifiers"] as? Int else { return nil }
+        return KeyCombo(QWERTYKeyCode: keyCode, carbonModifiers: modifiers)
     }
 }
 
