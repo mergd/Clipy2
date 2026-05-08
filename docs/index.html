@@ -77,15 +77,25 @@
 
       .screenshots {
         display: grid;
-        gap: 12px;
+        gap: 18px;
       }
 
-      .placeholder {
-        min-height: 140px;
-        padding: 12px;
-        border: 1px solid #aaa;
+      .screenshot {
+        margin: 0;
+      }
+
+      .screenshot img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #bbb;
         background: #fafafa;
+      }
+
+      .screenshot figcaption {
+        margin-top: 6px;
         color: #555;
+        font-size: 13px;
       }
 
       footer {
@@ -143,15 +153,18 @@
 
     <h2 id="screenshots">Screenshots</h2>
     <p>
-      Screenshots will go here later. Add image files to
-      <code>docs/assets/</code> and replace these boxes with
-      <code>&lt;img&gt;</code> tags.
+      A quick look at Clipy2's clipboard history menu and preferences.
     </p>
 
     <div class="screenshots">
-      <div class="placeholder">Main window screenshot</div>
-      <div class="placeholder">Snippets editor screenshot</div>
-      <div class="placeholder">Preferences screenshot</div>
+      <figure class="screenshot">
+        <img src="assets/usage.png" alt="Clipy2 clipboard history menu">
+        <figcaption>Clipboard history and snippets from the menu bar.</figcaption>
+      </figure>
+      <figure class="screenshot">
+        <img src="assets/settings.png" alt="Clipy2 preferences window">
+        <figcaption>Preferences for shortcuts, menu behavior, updates, and excluded apps.</figcaption>
+      </figure>
     </div>
 
     <h2>Links</h2>
