@@ -7,9 +7,9 @@
 [![CI](https://github.com/mergd/Clipy2/actions/workflows/CI.yml/badge.svg)](https://github.com/mergd/Clipy2/actions)
 [![Release version](https://img.shields.io/github/v/release/mergd/Clipy2.svg)](https://github.com/mergd/Clipy2/releases/latest)
 
-Clipy2 is a clipboard extension app for macOS. It keeps clipboard history close at hand and lets you save reusable snippets for quick pasting.
+Clipy2 is a modern clipboard extension app for macOS. It keeps clipboard history close at hand and lets you save reusable snippets for quick pasting.
 
-Clipy2 is a maintained fork of the original [Clipy](https://github.com/Clipy/Clipy) project, which is no longer maintained. This fork keeps the core Clipy workflow while updating the app for current macOS releases.
+Clipy2 is a maintained fork of the original [Clipy](https://github.com/Clipy/Clipy) project, which is no longer maintained. This fork keeps the core Clipy workflow while giving the app a more modern macOS experience.
 
 ## Requirements
 

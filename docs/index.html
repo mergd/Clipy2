@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clipy2</title>
+    <style>
+      body {
+        max-width: 760px;
+        margin: 40px auto;
+        padding: 0 18px;
+        background: #fff;
+        color: #111;
+        font-family: Verdana, Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 34px;
+        line-height: 1.1;
+      }
+
+      .masthead {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .app-icon {
+        width: 64px;
+        height: 64px;
+        image-rendering: auto;
+      }
+
+      h2 {
+        margin-top: 34px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ccc;
+        font-size: 19px;
+      }
+
+      p {
+        margin: 0 0 14px;
+      }
+
+      a {
+        color: #0645ad;
+      }
+
+      a:visited {
+        color: #663399;
+      }
+
+      .top {
+        margin-bottom: 28px;
+      }
+
+      .nav {
+        margin: 14px 0 0;
+        padding: 8px 0;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .nav a {
+        margin-right: 14px;
+      }
+
+      .download {
+        margin: 18px 0;
+        padding: 12px;
+        border: 1px solid #bbb;
+        background: #f7f7f7;
+      }
+
+      .screenshots {
+        display: grid;
+        gap: 12px;
+      }
+
+      .placeholder {
+        min-height: 140px;
+        padding: 12px;
+        border: 1px solid #aaa;
+        background: #fafafa;
+        color: #555;
+      }
+
+      footer {
+        margin-top: 42px;
+        padding-top: 12px;
+        border-top: 1px solid #ddd;
+        color: #555;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <div class="masthead">
+        <img class="app-icon" src="assets/app-icon.png" alt="Clipy2 app icon">
+        <h1>Clipy2</h1>
+      </div>
+      <p>A clipboard history app for macOS.</p>
+
+      <div class="nav">
+        <a href="#download">Download</a>
+        <a href="#about">About</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="https://github.com/mergd/Clipy2">Source</a>
+      </div>
+    </div>
+
+    <div class="download" id="download">
+      <strong>Download:</strong>
+      <a href="https://github.com/mergd/Clipy2/releases">GitHub Releases</a>
+    </div>
+
+    <h2 id="about">About</h2>
+    <p>
+      Clipy2 is a small menu bar application for keeping clipboard history on
+      macOS. When you copy something, Clipy2 can keep it in a local history so
+      you can bring it back later.
+    </p>
+    <p>
+      It also supports snippets. Snippets are reusable pieces of text that you
+      paste often, such as links, signatures, templates, commands, or short
+      replies.
+    </p>
+    <p>
+      Clipy2 is a modernized fork of Clipy. It keeps the basic idea simple:
+      clipboard history, snippets, keyboard shortcuts, and a menu bar interface.
+    </p>
+
+    <h2>Requirements</h2>
+    <ul>
+      <li>macOS 13 Ventura or newer</li>
+      <li>Accessibility permission may be required for paste actions</li>
+      <li>Open source, MIT license</li>
+    </ul>
+
+    <h2 id="screenshots">Screenshots</h2>
+    <p>
+      Screenshots will go here later. Add image files to
+      <code>docs/assets/</code> and replace these boxes with
+      <code>&lt;img&gt;</code> tags.
+    </p>
+
+    <div class="screenshots">
+      <div class="placeholder">Main window screenshot</div>
+      <div class="placeholder">Snippets editor screenshot</div>
+      <div class="placeholder">Preferences screenshot</div>
+    </div>
+
+    <h2>Links</h2>
+    <ul>
+      <li><a href="https://github.com/mergd/Clipy2/releases">Releases</a></li>
+      <li><a href="https://github.com/mergd/Clipy2">GitHub repository</a></li>
+    </ul>
+
+    <footer>
+      Clipy2 is a fork of Clipy.
+    </footer>
+  </body>
+</html>
